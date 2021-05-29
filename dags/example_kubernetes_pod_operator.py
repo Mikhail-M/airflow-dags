@@ -27,9 +27,9 @@ from airflow.providers.google.cloud.operators.kubernetes_engine import \
     GKEStartPodOperator
 from airflow.utils.dates import days_ago
 
-GCP_PROJECT_ID = os.environ.get("GCP_PROJECT_ID", "example-project")
-GCP_LOCATION = os.environ.get("GCP_GKE_LOCATION", "europe-north1-a")
-CLUSTER_NAME = os.environ.get("GCP_GKE_CLUSTER_NAME", "cluster-name")
+GCP_PROJECT_ID = os.environ.get("GCP_PROJECT_ID", "fifth-repeater-110906")
+GCP_LOCATION = os.environ.get("GCP_GKE_LOCATION", "us-central1-c")
+CLUSTER_NAME = os.environ.get("GCP_GKE_CLUSTER_NAME", "cluster-1")
 
 
 with models.DAG(

@@ -34,29 +34,15 @@ with models.DAG(
     "example_gcp_gke",
     schedule_interval=None,  # Override to match your needs
     start_date=days_ago(1),
-    tags=['example'],
+    tags=["example"],
 ) as dag:
     kubernetes_min_pod = KubernetesPodOperator(
         # The ID specified for the task.
-        task_id='pod-ex-minimum',
+        task_id="pod-ex-minimum",
         # Name of task you want to run, used to generate Pod ID.
-        name='pod-ex-minimum',
-        # Entrypoint of the container, if not specified the Docker container's
-        # entrypoint is used. The cmds parameter is templated.
-        cmds=['echo', "kek"],
-        # The namespace to run within Kubernetes, default namespace is
-        # `default`. There is the potential for the resource starvation of
-        # Airflow workers and scheduler within the Cloud Composer environment,
-        # the recommended solution is to increase the amount of nodes in order
-        # to satisfy the computing requirements. Alternatively, launching pods
-        # into a custom namespace will stop fighting over resources.
-        namespace='airflow-stage',
-        service_account_name="airflow-scheduler",
-        # Docker image specified. Defaults to hub.docker.com, but any fully
-        # qualified URLs will point to a custom repository. Supports private
-        # gcr.io images if the Composer Environment is under the same
-        # project-id as the gcr.io images and the service account that Composer
-        # uses has permission to access the Google Container Registry
-        # (the default service account has permission)
-        image='alpine')
+        name="pod-ex-minimum",
+        cmds=["echo", "kek"],
+        namespace="{{ var.value.namespace }}",
+        service_account_name="{{ var.value.service_account_name }}",
+        image="alpine")
 

@@ -43,7 +43,7 @@ with models.DAG(
         name='pod-ex-minimum',
         # Entrypoint of the container, if not specified the Docker container's
         # entrypoint is used. The cmds parameter is templated.
-        cmds=['echo kek'],
+        cmds=['echo', "kek"],
         # The namespace to run within Kubernetes, default namespace is
         # `default`. There is the potential for the resource starvation of
         # Airflow workers and scheduler within the Cloud Composer environment,

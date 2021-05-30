@@ -24,25 +24,27 @@ import os
 from airflow import models
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 from airflow.utils.dates import days_ago
+Variable
 
 GCP_PROJECT_ID = os.environ.get("GCP_PROJECT_ID", "fifth-repeater-110906")
 GCP_LOCATION = os.environ.get("GCP_GKE_LOCATION", "us-central1-c")
 CLUSTER_NAME = os.environ.get("GCP_GKE_CLUSTER_NAME", "cluster-1")
-
+    
 
 with models.DAG(
     "example_gcp_gke",
     schedule_interval=None,  # Override to match your needs
     start_date=days_ago(1),
-    tags=["example"],
+    tags=['example'],
 ) as dag:
+
     kubernetes_min_pod = KubernetesPodOperator(
         # The ID specified for the task.
-        task_id="pod-ex-minimum",
+        task_id='pod-ex-minimum',
         # Name of task you want to run, used to generate Pod ID.
-        name="pod-ex-minimum",
-        cmds=["echo", "kek"],
-        namespace="{{ var.value.namespace }}",
-        service_account_name="{{ var.value.service_account_name }}",
-        image="alpine")
+        name='pod-ex-minimum',
+        cmds=['echo', "kek"],
+        namespace=,
+        service_account_name="airflow-scheduler",
+        image='alpine')
 
